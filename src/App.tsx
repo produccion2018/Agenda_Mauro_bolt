@@ -7,6 +7,7 @@
 import { useState } from 'react';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { DataProvider } from '@/context/DataContext';
+import { ThemeProvider } from '@/context/ThemeContext';
 import AuthView from '@/views/AuthView';
 import Dashboard from '@/views/Dashboard';
 import CalendarView from '@/views/CalendarView';
@@ -91,10 +92,12 @@ function MainApp() {
 
 export default function App() {
   return (
-    <AuthProvider>
-      <DataProvider>
-        <MainApp />
-      </DataProvider>
-    </AuthProvider>
+    <ThemeProvider>
+      <AuthProvider>
+        <DataProvider>
+          <MainApp />
+        </DataProvider>
+      </AuthProvider>
+    </ThemeProvider>
   );
 }

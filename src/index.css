@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Sora:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Sora:wght@400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -15,152 +15,96 @@
 
   body {
     margin: 0;
-    font-family: 'Inter', system-ui, sans-serif;
-    background: #070114;
-    color: #ede9fe;
+    font-family: 'Manrope', system-ui, sans-serif;
+    background-color: oklch(0.16 0.055 300);
+    background-image:
+      radial-gradient(1000px 600px at 15% -10%, oklch(0.55 0.25 305 / 45%), transparent 60%),
+      radial-gradient(900px 600px at 100% 10%, oklch(0.5 0.2 275 / 40%), transparent 60%),
+      radial-gradient(700px 500px at 50% 110%, oklch(0.6 0.22 330 / 30%), transparent 60%);
+    background-attachment: fixed;
+    color: oklch(0.96 0.012 300);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Sora', 'Inter', sans-serif;
+    font-family: 'Sora', 'Manrope', sans-serif;
+    letter-spacing: -0.02em;
   }
 
   ::selection {
-    background: rgba(139, 92, 246, 0.35);
-    color: #f3e8ff;
+    background: oklch(0.62 0.24 300 / 35%);
+    color: oklch(0.96 0.012 300);
   }
 
-  /* Custom scrollbar */
   ::-webkit-scrollbar {
     width: 8px;
     height: 8px;
   }
 
   ::-webkit-scrollbar-track {
-    background: rgba(13, 2, 32, 0.5);
+    background: oklch(0.16 0.055 300 / 60%);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #4c1d95, #2d0f5e);
+    background: linear-gradient(180deg, oklch(0.5 0.2 300), oklch(0.35 0.09 300));
     border-radius: 4px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: linear-gradient(180deg, #6d28d9, #4c1d95);
+    background: linear-gradient(180deg, oklch(0.6 0.22 300), oklch(0.5 0.2 300));
   }
 }
 
 @layer components {
-  /* Glassmorphism card */
-  .glass {
-    background: rgba(30, 10, 71, 0.4);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(139, 92, 246, 0.15);
-  }
-
   .glass-strong {
-    background: rgba(19, 3, 42, 0.7);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 1px solid rgba(139, 92, 246, 0.2);
-  }
-
-  .glass-card {
-    background: linear-gradient(135deg, rgba(30, 10, 71, 0.5) 0%, rgba(19, 3, 42, 0.6) 100%);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(139, 92, 246, 0.15);
-    border-radius: 1rem;
-    transition: all 0.3s ease;
-  }
-
-  .glass-card:hover {
-    border-color: rgba(139, 92, 246, 0.3);
-    box-shadow: 0 8px 32px rgba(76, 29, 149, 0.2);
-  }
-
-  /* Neon glow text */
-  .neon-text {
-    text-shadow: 0 0 20px rgba(168, 139, 250, 0.5), 0 0 40px rgba(168, 139, 250, 0.3);
-  color: #e9d5ff;
-  }
-
-  /* Gradient text */
-  .gradient-text {
-    background: linear-gradient(135deg, #c4b5fd 0%, #d8b4fe 50%, #bf5af2 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .gradient-text-cyan {
-    background: linear-gradient(135deg, #c4b5fd 0%, #22d3ee 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Neon border glow */
-  .neon-border {
-    box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.3), 0 0 20px rgba(139, 92, 246, 0.15);
-  }
-
-  .neon-border-hover:hover {
-    box-shadow: 0 0 0 1px rgba(139, 92, 246, 0.5), 0 0 30px rgba(139, 92, 246, 0.3);
-  }
-
-  /* Animated gradient background */
-  .animated-bg {
-    background: linear-gradient(-45deg, #0a0118, #13032a, #1e0a47, #13032a, #0a0118);
-    background-size: 400% 400%;
-    animation: gradientShift 15s ease infinite;
-  }
-
-  /* Shimmer effect */
-  .shimmer {
     background: linear-gradient(
-      90deg,
-      transparent 0%,
-      rgba(139, 92, 246, 0.1) 50%,
-      transparent 100%
+      145deg,
+      oklch(0.35 0.09 300 / 55%),
+      oklch(0.22 0.07 300 / 45%)
     );
-    background-size: 200% 100%;
-    animation: shimmer 3s linear infinite;
+    backdrop-filter: blur(24px) saturate(160%);
+    -webkit-backdrop-filter: blur(24px) saturate(160%);
+    border: 1px solid oklch(0.42 0.08 300 / 45%);
+    box-shadow: 0 0 0 1px oklch(0.7 0.18 300 / 25%), 0 18px 50px -18px oklch(0.6 0.25 300 / 60%);
   }
 
-  /* Input styles */
+  .gradient-text {
+    background: linear-gradient(100deg, oklch(0.9 0.08 300), oklch(0.78 0.18 305), oklch(0.85 0.13 275));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
   .input-violet {
-    background: rgba(13, 2, 32, 0.6);
-    border: 1px solid rgba(139, 92, 246, 0.2);
-    color: #ede9fe;
+    background: oklch(0.22 0.06 300 / 60%);
+    border: 1px solid oklch(0.42 0.08 300 / 45%);
+    color: oklch(0.96 0.012 300);
     transition: all 0.3s ease;
   }
 
   .input-violet:focus {
     outline: none;
-    border-color: rgba(139, 92, 246, 0.5);
-    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
-    background: rgba(13, 2, 32, 0.8);
+    border-color: oklch(0.72 0.19 300);
+    box-shadow: 0 0 0 3px oklch(0.62 0.24 300 / 20%);
+    background: oklch(0.22 0.06 300 / 85%);
   }
 
   .input-violet::placeholder {
-    color: rgba(196, 181, 253, 0.4);
+    color: oklch(0.72 0.045 300 / 70%);
   }
 
-  /* Button styles */
   .btn-primary {
-    background: linear-gradient(135deg, #6d28d9 0%, #4c1d95 100%);
-    color: #f3e8ff;
+    background: linear-gradient(135deg, oklch(0.62 0.24 300), oklch(0.72 0.19 275));
+    color: oklch(0.99 0.005 300);
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(109, 40, 217, 0.3);
+    box-shadow: 0 4px 20px oklch(0.5 0.2 300 / 35%);
   }
 
   .btn-primary:hover {
-    background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
-    box-shadow: 0 6px 30px rgba(109, 40, 217, 0.5);
+    box-shadow: 0 6px 30px oklch(0.5 0.2 300 / 55%);
     transform: translateY(-1px);
   }
 
@@ -169,33 +113,28 @@
   }
 
   .btn-ghost {
-    background: rgba(139, 92, 246, 0.1);
-    color: #c4b5fd;
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    background: oklch(0.62 0.24 300 / 10%);
+    color: oklch(0.85 0.13 300);
+    border: 1px solid oklch(0.42 0.08 300 / 45%);
     transition: all 0.3s ease;
   }
 
   .btn-ghost:hover {
-    background: rgba(139, 92, 246, 0.2);
-    border-color: rgba(139, 92, 246, 0.4);
-    color: #d8b4fe;
+    background: oklch(0.62 0.24 300 / 20%);
+    border-color: oklch(0.62 0.24 300 / 50%);
+    color: oklch(0.9 0.08 300);
   }
 
-  /* Floating orb decorations */
   .orb {
     position: absolute;
     border-radius: 50%;
     filter: blur(80px);
-    opacity: 0.4;
+    opacity: 0.35;
     pointer-events: none;
   }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-
   .no-scrollbar::-webkit-scrollbar {
     display: none;
   }
@@ -204,8 +143,232 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+}
 
-  .perspective {
-    perspective: 1000px;
-  }
+/* =====================================================
+   MODO CLARO (LIGHT)
+   ===================================================== */
+/* Se activa cuando ThemeContext setea data-theme="light" en <html>.
+   Todo lo de arriba queda igual y es el modo oscuro (default). */
+
+[data-theme='light'] body {
+  background-color: oklch(0.98 0.008 300);
+  background-image:
+    radial-gradient(1000px 600px at 15% -10%, oklch(0.9 0.05 305 / 50%), transparent 60%),
+    radial-gradient(900px 600px at 100% 10%, oklch(0.9 0.04 275 / 45%), transparent 60%),
+    radial-gradient(700px 500px at 50% 110%, oklch(0.92 0.05 330 / 35%), transparent 60%);
+  color: oklch(0.25 0.03 300);
+}
+
+[data-theme='light'] ::-webkit-scrollbar-track {
+  background: oklch(0.94 0.01 300 / 80%);
+}
+
+[data-theme='light'] .glass-strong {
+  background: linear-gradient(
+    145deg,
+    oklch(0.99 0.004 300 / 85%),
+    oklch(0.96 0.008 300 / 80%)
+  );
+  border: 1px solid oklch(0.85 0.03 300 / 60%);
+  box-shadow: 0 0 0 1px oklch(0.7 0.05 300 / 15%), 0 18px 50px -18px oklch(0.5 0.1 300 / 20%);
+}
+
+[data-theme='light'] .gradient-text {
+  background: linear-gradient(100deg, oklch(0.45 0.18 300), oklch(0.5 0.2 305), oklch(0.48 0.15 275));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme='light'] .input-violet {
+  background: oklch(0.97 0.006 300 / 90%);
+  border: 1px solid oklch(0.85 0.03 300 / 70%);
+  color: oklch(0.25 0.03 300);
+}
+
+[data-theme='light'] .input-violet:focus {
+  border-color: oklch(0.6 0.2 300);
+  box-shadow: 0 0 0 3px oklch(0.6 0.2 300 / 15%);
+  background: oklch(1 0 0);
+}
+
+[data-theme='light'] .input-violet::placeholder {
+  color: oklch(0.55 0.02 300 / 70%);
+}
+
+[data-theme='light'] .btn-ghost {
+  background: oklch(0.62 0.24 300 / 8%);
+  color: oklch(0.45 0.18 300);
+  border: 1px solid oklch(0.8 0.05 300 / 50%);
+}
+
+[data-theme='light'] .btn-ghost:hover {
+  background: oklch(0.62 0.24 300 / 15%);
+  border-color: oklch(0.62 0.24 300 / 40%);
+  color: oklch(0.4 0.2 300);
+}
+
+/* Textos que en oscuro son "lavender-100/200" y en claro necesitan ser oscuros */
+[data-theme='light'] .text-lavender-100,
+[data-theme='light'] .text-lavender-200 {
+  color: oklch(0.3 0.05 300);
+}
+
+[data-theme='light'] .text-violet-200\/50,
+[data-theme='light'] .text-violet-200\/40,
+[data-theme='light'] .text-violet-200\/60 {
+  color: oklch(0.45 0.03 300 / 80%);
+}
+
+/* =====================================================
+   COLOR DEL SIDEBAR (elegido por el cliente)
+   ===================================================== */
+/* El violeta (default) no necesita override: usa .glass-strong tal cual.
+   Estos bloques solo aplican DENTRO del sidebar (.sidebar-surface),
+   sin afectar el resto de la app ni el modo claro/oscuro general. */
+
+/* --- Blanco --- */
+[data-sidebar-color='white'] .sidebar-surface {
+  background: oklch(1 0 0);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-right: 1px solid oklch(0.9 0.005 300);
+  box-shadow: 4px 0 24px -12px oklch(0.5 0.05 300 / 25%);
+}
+
+[data-sidebar-color='white'] .sidebar-surface .gradient-text {
+  background: linear-gradient(100deg, oklch(0.4 0.18 300), oklch(0.48 0.2 305), oklch(0.45 0.15 275));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-sidebar-color='white'] .sidebar-surface .text-lavender-100,
+[data-sidebar-color='white'] .sidebar-surface .text-lavender-200 {
+  color: oklch(0.28 0.04 300);
+}
+
+[data-sidebar-color='white'] .sidebar-surface .text-violet-200\/40,
+[data-sidebar-color='white'] .sidebar-surface .text-violet-200\/50,
+[data-sidebar-color='white'] .sidebar-surface .text-violet-200\/60 {
+  color: oklch(0.5 0.02 300 / 85%);
+}
+
+[data-sidebar-color='white'] .sidebar-surface .glass-strong {
+  background: oklch(0.98 0.005 300);
+  border: 1px solid oklch(0.88 0.01 300);
+  box-shadow: 0 4px 16px -8px oklch(0.5 0.05 300 / 25%);
+}
+
+/* --- Azul --- */
+[data-sidebar-color='blue'] .sidebar-surface {
+  background: linear-gradient(
+    165deg,
+    oklch(0.32 0.1 250 / 95%),
+    oklch(0.2 0.09 245 / 95%)
+  );
+  border-right: 1px solid oklch(0.45 0.12 245 / 45%);
+  box-shadow: 0 0 0 1px oklch(0.5 0.15 245 / 20%), 4px 0 24px -12px oklch(0.3 0.15 245 / 60%);
+}
+
+[data-sidebar-color='blue'] .sidebar-surface .gradient-text {
+  background: linear-gradient(100deg, oklch(0.85 0.08 230), oklch(0.75 0.15 235), oklch(0.8 0.1 210));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-sidebar-color='blue'] .sidebar-surface .glass-strong {
+  background: linear-gradient(145deg, oklch(0.4 0.1 245 / 55%), oklch(0.28 0.09 245 / 45%));
+  border: 1px solid oklch(0.5 0.12 245 / 45%);
+}
+
+/* --- Negro --- */
+[data-sidebar-color='black'] .sidebar-surface {
+  background: oklch(0.1 0 0);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border-right: 1px solid oklch(0.22 0 0);
+  box-shadow: 4px 0 24px -12px oklch(0 0 0 / 70%);
+}
+
+[data-sidebar-color='black'] .sidebar-surface .gradient-text {
+  background: linear-gradient(100deg, oklch(0.9 0.03 300), oklch(0.75 0.1 300), oklch(0.85 0.02 275));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-sidebar-color='black'] .sidebar-surface .glass-strong {
+  background: oklch(0.15 0 0);
+  border: 1px solid oklch(0.25 0 0);
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+.animate-float {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+@keyframes card-in {
+  from { opacity: 0; transform: translateY(18px) scale(0.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-card-in {
+  animation: card-in 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fade-in-down {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in-down {
+  animation: fade-in-down 0.3s ease both;
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-scale-in {
+  animation: scale-in 0.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* animación */
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-1px); }
+  20%, 80% { transform: translateX(2px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+.animate-shake {
+  animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes success-pop {
+  0% { opacity: 0; transform: scale(0.9); }
+  60% { opacity: 1; transform: scale(1.03); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.animate-success-pop {
+  animation: success-pop 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes fade-slide {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-slide {
+  animation: fade-slide 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes card-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+.animate-card-float {
+  animation: card-float 5s ease-in-out infinite;
 }

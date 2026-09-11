@@ -9,7 +9,7 @@ import { useState } from 'react';
 import {
   CheckSquare, Repeat, Bell, Inbox,
   StickyNote, Zap, AlarmClock, TrendingUp,
-  Calendar as CalendarIcon, ArrowRight,
+  ArrowRight,
 } from 'lucide-react';
 import { useData } from '@/context/DataContext';
 import { useAuth } from '@/context/AuthContext';
@@ -27,8 +27,7 @@ interface DashboardProps {
 }
 
 export default function Dashboard({ onNavigate }: DashboardProps) {
-  const { tasks, habits, reminders } = useData();
-  const { triggerAlarm } = useData();
+  const { tasks, habits, reminders, triggerAlarm } = useData();
   const { user } = useAuth();
   const [showAllTasks, setShowAllTasks] = useState(false);
 
