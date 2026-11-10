@@ -4,7 +4,7 @@
 // Punto de entrada de la aplicación. Gestiona autenticación,
 // navegación entre vistas y el layout principal.
 
-import { useState } from 'react';
+import { useEffect, useState, type CSSProperties } from 'react';
 import { AuthProvider, useAuth } from '@/context/AuthContext';
 import { DataProvider } from '@/context/DataContext';
 import { ThemeProvider } from '@/context/ThemeContext';
@@ -90,9 +90,46 @@ function MainApp() {
   );
 }
 
+/** Intro de marca: solo en la primera carga de la página. */
+function Intro() {
+  useEffect(() => {
+    const root = document.documentElement;
+    if (root.classList.contains('ls-ready')) return;
+    const t = window.setTimeout(() => root.classList.add('ls-ready'), 2600);
+    return () => window.clearTimeout(t);
+  }, []);
+
+  return (
+    <div className="ls-intro" aria-hidden="true">
+      <div className="flex flex-col items-center gap-6">
+        <div className="relative w-24 h-24 grid place-items-center">
+          <span className="ls-ring" />
+          <span className="ls-ring r2" />
+          <span className="ls-ring r3" />
+          <span className="w-3 h-3 rounded-full bg-white shadow-[0_0_20px_#bf5af2]" />
+        </div>
+        <p className="font-display text-3xl font-bold text-white">
+          {'LifeSync'.split('').map((ch, i) => (
+            <span key={i} className="ls-letter" style={{ '--i': i } as CSSProperties}>
+              {ch}
+            </span>
+          ))}
+          <span className="ls-letter ml-2 text-neon-purple" style={{ '--i': 9 } as CSSProperties}>
+            Pro
+          </span>
+        </p>
+        <p className="ls-letter text-[11px] uppercase tracking-[0.4em] text-violet-200/60" style={{ '--i': 12 } as CSSProperties}>
+          Sincronizando tu día
+        </p>
+      </div>
+    </div>
+  );
+}
+
 export default function App() {
   return (
     <ThemeProvider>
+      <Intro />
       <AuthProvider>
         <DataProvider>
           <MainApp />

@@ -8,7 +8,7 @@
 import { useState, useEffect } from 'react';
 import {
   Eye, EyeOff, Mail, Lock, User as UserIcon,
-  ArrowRight, CheckCircle2, AlertCircle, KeyRound, ShieldCheck,
+  ArrowRight, CheckCircle2, AlertCircle, KeyRound, ShieldCheck, Flame, BellRing,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import ForgotPasswordView from '@/views/ForgotPasswordView';
@@ -126,6 +126,46 @@ export default function AuthView() {
               Despertador visual a pantalla completa
             </li>
           </ul>
+
+          {/* Vista previa flotante de la app */}
+          <div className="relative mt-10 h-44 max-w-md">
+            <div
+              className="ls-chip glass-strong absolute left-0 top-0 flex items-center gap-3 rounded-2xl px-4 py-3"
+              style={{ '--r': '-3deg' } as React.CSSProperties}
+            >
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-emerald-400/20 text-emerald-300">
+                <CheckCircle2 className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-lavender-100">Pastilla de la mañana</p>
+                <p className="text-xs text-violet-200/50">08:00 · Tomada</p>
+              </div>
+            </div>
+            <div
+              className="ls-chip glass-strong absolute right-0 top-10 flex items-center gap-3 rounded-2xl px-4 py-3"
+              style={{ '--r': '3deg', animationDelay: '-2s' } as React.CSSProperties}
+            >
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-fuchsia-400/20 text-fuchsia-300">
+                <Flame className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-lavender-100">Gimnasio</p>
+                <p className="text-xs text-violet-200/50">Racha de 12 días</p>
+              </div>
+            </div>
+            <div
+              className="ls-chip glass-strong absolute bottom-0 left-16 flex items-center gap-3 rounded-2xl px-4 py-3"
+              style={{ '--r': '-1deg', animationDelay: '-4s' } as React.CSSProperties}
+            >
+              <span className="grid h-9 w-9 place-items-center rounded-xl bg-amber-400/20 text-amber-300">
+                <BellRing className="h-5 w-5" />
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-lavender-100">Entrega del proyecto</p>
+                <p className="text-xs text-violet-200/50">Hoy · 18:00</p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Columna derecha: tarjeta de login */}
