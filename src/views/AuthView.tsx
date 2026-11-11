@@ -5,7 +5,8 @@
 // TODO: Conectar aquí la API de autenticación con Token.
 // TODO: Reemplazar las funciones simuladas con fetch al backend.
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import { isTourMode } from '@/data/seedData';
 import {
   Eye, EyeOff, Mail, Lock, User as UserIcon,
   ArrowRight, CheckCircle2, AlertCircle, KeyRound, ShieldCheck, Flame, BellRing,
@@ -25,6 +26,27 @@ export default function AuthView() {
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [shake, setShake] = useState(false);
+  const formRef = useRef<HTMLFormElement>(null);
+
+  // Recorrido automático del portfolio: escribe un usuario de prueba y entra solo
+  useEffect(() => {
+    if (!isTourMode) return;
+    const demoEmail = 'mauro@lifesync.app';
+    const demoPass = 'demo1234';
+    const timers: number[] = [];
+    let t = 2600; // espera a que termine la intro
+    demoEmail.split('').forEach((_, i) => {
+      t += 55;
+      timers.push(window.setTimeout(() => setEmail(demoEmail.slice(0, i + 1)), t));
+    });
+    t += 250;
+    demoPass.split('').forEach((_, i) => {
+      t += 70;
+      timers.push(window.setTimeout(() => setPassword(demoPass.slice(0, i + 1)), t));
+    });
+    timers.push(window.setTimeout(() => formRef.current?.requestSubmit(), t + 500));
+    return () => timers.forEach((id) => window.clearTimeout(id));
+  }, []);
 
   const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const passwordValid = password.length >= 6;
@@ -214,7 +236,7 @@ export default function AuthView() {
             </p>
           </div>
 
-          <form key={mode} onSubmit={handleSubmit} className="animate-fade-slide space-y-4">
+          <form ref={formRef} key={mode} onSubmit={handleSubmit} className="animate-fade-slide space-y-4">
             {mode === 'register' && (
               <div className="animate-fade-in-down">
                 <label className="block text-xs font-medium mb-1.5" style={{ color: 'oklch(0.72 0.045 300)' }}>

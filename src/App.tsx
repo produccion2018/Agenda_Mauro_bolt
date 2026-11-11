@@ -20,11 +20,40 @@ import Sidebar from '@/components/Sidebar';
 import TopBar from '@/components/TopBar';
 import AlarmModal from '@/components/AlarmModal';
 import type { AppView } from '@/types';
+import { isTourMode } from '@/data/seedData';
 
 function MainApp() {
   const { isAuthenticated, isLoading } = useAuth();
   const [currentView, setCurrentView] = useState<AppView>('dashboard');
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+
+  // Recorrido automático del portfolio (?tour=1): va mostrando las secciones solo.
+  // Si el usuario hace clic o scroll se pausa y retoma tras unos segundos.
+  useEffect(() => {
+    if (!isTourMode || !isAuthenticated) return;
+    const order: AppView[] = ['dashboard', 'tasks', 'habits', 'calendar', 'notes'];
+    let i = 0;
+    let paused = false;
+    let idle = 0;
+    const onUser = () => {
+      paused = true;
+      window.clearTimeout(idle);
+      idle = window.setTimeout(() => (paused = false), 9000);
+    };
+    const evs = ['wheel', 'touchstart', 'mousedown', 'keydown'] as const;
+    evs.forEach((e) => window.addEventListener(e, onUser, { passive: true }));
+    const id = window.setInterval(() => {
+      if (paused) return;
+      i = (i + 1) % order.length;
+      setCurrentView(order[i]);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 5000);
+    return () => {
+      window.clearInterval(id);
+      window.clearTimeout(idle);
+      evs.forEach((e) => window.removeEventListener(e, onUser));
+    };
+  }, [isAuthenticated]);
 
   // Pantalla de carga
   if (isLoading) {
@@ -85,6 +114,12 @@ function MainApp() {
       </div>
 
       {/* Modal de alarma flotante */}
+      {isTourMode && (
+        <div className="pointer-events-none fixed bottom-5 left-1/2 z-50 -translate-x-1/2 rounded-full border border-violet-300/30 bg-[#13032a]/85 px-4 py-2 text-xs text-violet-100 shadow-lg backdrop-blur-xl">
+          <span className="mr-2 inline-block h-2 w-2 animate-pulse rounded-full bg-neon-purple align-middle" />
+          Recorrido automático · tocá para explorar
+        </div>
+      )}
       <AlarmModal />
     </div>
   );

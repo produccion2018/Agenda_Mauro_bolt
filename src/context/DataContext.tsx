@@ -30,6 +30,12 @@ import {
   seedNotifications,
   seedNotes,
   seedAlarm,
+  isTourMode,
+  demoTasks,
+  demoHabits,
+  demoReminders,
+  demoNotifications,
+  demoNotes,
 } from '@/data/seedData';
 
 interface DataContextValue {
@@ -74,11 +80,11 @@ interface DataContextValue {
 const DataContext = createContext<DataContextValue | undefined>(undefined);
 
 export function DataProvider({ children }: { children: ReactNode }) {
-  const [tasks, setTasks] = useState<Task[]>(seedTasks);
-  const [habits, setHabits] = useState<Habit[]>(seedHabits);
-  const [reminders, setReminders] = useState<Reminder[]>(seedReminders);
-  const [notifications, setNotifications] = useState<AppNotification[]>(seedNotifications);
-  const [notes, setNotes] = useState<QuickNote[]>(seedNotes);
+  const [tasks, setTasks] = useState<Task[]>(isTourMode ? demoTasks : seedTasks);
+  const [habits, setHabits] = useState<Habit[]>(isTourMode ? demoHabits : seedHabits);
+  const [reminders, setReminders] = useState<Reminder[]>(isTourMode ? demoReminders : seedReminders);
+  const [notifications, setNotifications] = useState<AppNotification[]>(isTourMode ? demoNotifications : seedNotifications);
+  const [notes, setNotes] = useState<QuickNote[]>(isTourMode ? demoNotes : seedNotes);
   const [alarm, setAlarm] = useState<ActiveAlarm | null>(null);
 
   // --- Cálculo del nivel de energía ---
